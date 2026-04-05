@@ -1,0 +1,47 @@
+pcf
+* control data
+             restart          estimation
+         10       87671         8         0        1
+         1         1              single               point         1
+       10.0              -2                     0.3          0.01          10
+       10.0   10.0   1.000000E-03
+   1.000000E-01
+         6   1.000000E-02         3         3   1.000000E-02         3
+         0         0         0
+* parameter groups
+obs_beta                    relative              2.0000000000E-02      0.01     switch                1.5000000000E+00      parabolic
+obs_eta                     relative              2.0000000000E-02      0.01     switch                1.5000000000E+00      parabolic
+clim_mu                     relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic
+clim_sigma                  relative              2.0000000000E-02      0.01     switch                1.5000000000E+00      parabolic              
+clim_delta                  relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic  
+alpha1                      relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic  
+alpha2                      relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic  
+alpha3                      relative              2.0000000000E-02      0.01     switch                1.5000000000E+00      parabolic  
+alpha4                      relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic  
+alpha5                      relative              2.0000000000E-02      0.001    switch                1.5000000000E+00      parabolic    
+* parameter data
+obs_beta                  fixed                 factor                0.0000      0.0000      0.0000      obs_beta                    1.0000000000E+00      0.0000000000E+00      1
+obs_eta                   none                  factor                0.3000      0.0010      1.0000      obs_eta                     1.0000000000E+00      0.0000000000E+00      1
+clim_mu                   fixed                 factor                0.1324      0.1324      0.1324      clim_mu                     1.0000000000E+00      0.0000000000E+00      1
+clim_sigma                fixed                 factor                0.6133      0.6133      0.6133      clim_sigma                  1.0000000000E+00      0.0000000000E+00      1         
+clim_delta                fixed                 factor                -0.0080     -0.0080     -0.0080     clim_delta                  1.0000000000E+00      0.0000000000E+00      1
+alpha1                    none                  factor                0.1000      0.0001      1.0000      alpha1                      1.0000000000E+00      0.0000000000E+00      1
+alpha2                    none                  factor                0.2000      0.0001      1.0000      alpha2                      1.0000000000E+00      0.0000000000E+00      1         
+alpha3                    none                  factor                1.5000      0.0001      5.0000      alpha3                      1.0000000000E+00      0.0000000000E+00      1
+alpha4                    none                  factor                0.5000      0.0001      5.0000      alpha4                      1.0000000000E+00      0.0000000000E+00      1
+alpha5                    fixed                 factor                0.0000      0.0000      0.0000      alpha5                      1.0000000000E+00      0.0000000000E+00      1 
+* observation groups
+gage-1                        
+* observation data external
+Obs01532000.csv
+* model command line
+./RunCali.sh
+* model input
+Input.txt.tpl Input.txt
+* model output
+Output01532000.txt.Ins Output.txt
+++ ies_num_reals(100)
+++ ies_subset_size(10)
+++ overdue_giveup_fac(30000)
+++ ies_accept_phi_fac(1.05)
+++ ies_multimodal_alpha(0.25)

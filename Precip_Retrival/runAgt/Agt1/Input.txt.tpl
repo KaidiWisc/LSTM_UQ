@@ -1,0 +1,11 @@
+ptf ~
+obs_beta ~obs_beta~
+obs_eta ~obs_eta~
+clim_mu ~clim_mu~
+clim_sigma ~clim_sigma~
+clim_delta ~clim_delta~
+alpha1 ~alpha1~
+alpha2 ~alpha2~
+alpha3 ~alpha3~
+alpha4 ~alpha4~
+alpha5 ~alpha5~

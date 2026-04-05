@@ -1,0 +1,62 @@
+universe = container
+# docker_image = docker://kaidipeng/lstm:cuda116
+# container_image = /home/kpeng43/Combo/container.sif
+container_image = container.sif
++SingularityImage = "container.sif"
+transfer_container = False
+
+executable = IMERG.sh
+
+log = mylstm.log
+error = mylstm$(Process).err
+output = mylstm$(Process).out
+
+arguments = $(Process)
+
+# paths for input files must be relative to the directory defined in 'initialdir':
+f1=$(Process) * 10 + 1
+f2=$(Process) * 10 + 2
+f3=$(Process) * 10 + 3
+f4=$(Process) * 10 + 4
+f5=$(Process) * 10 + 5
+f6=$(Process) * 10 + 6
+f7=$(Process) * 10 + 7
+f8=$(Process) * 10 + 8
+f9=$(Process) * 10 + 9
+f10=$(Process) * 10 + 10
+
+transfer_input_files =/home/kpeng43/LSTMUQ/PrecipR/01532000/runLSTM,\
+/home/kpeng43/LSTMUQ/PrecipR/01532000/runCSGD,\
+/home/kpeng43/LSTMUQ/PrecipR/CAMELS_US_ori,\
+/home/kpeng43/LSTMUQ/PrecipR/container.sif,\
+Input$INT(f1).txt,Input$INT(f2).txt,Input$INT(f3).txt,Input$INT(f4).txt,Input$INT(f5).txt,\
+Input$INT(f6).txt,Input$INT(f7).txt,Input$INT(f8).txt,Input$INT(f9).txt,Input$INT(f10).txt,
+
+# requirements = (HasCHTCStaging == true)
+
+Should_transfer_files = YES
+
+when_to_transfer_output = ON_EXIT
+
+periodic_release = (HoldReasonCode == 21) || (HoldReasonCode == 34)
+
++WantGPULab = true
++GPUJobLength = "short" 
++is_resumable = true
+want_campus_pools = true
+want_ospool = true
+require_gpus = (DriverVersion >= 11.8) 
+# requirements = (Poolname =!= "CHTC")
+# requirements = Machine != 'gpu4000.chtc.wisc.edu'
+
+# gpus_minimum_capability = <version>
+# gpus_maximum_capability = <version> gpus_minimum_memory
+gpus_minimum_memory = 23G
+
+request_gpus = 1
+request_cpus = 1
+request_memory =20GB
+request_disk = 10GB
+
+
+queue 10

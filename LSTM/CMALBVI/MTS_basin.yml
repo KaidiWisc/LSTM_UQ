@@ -1,0 +1,158 @@
+# --- changes --------------------------------------------------------------------
+n_distributions: 3
+
+hidden_size: 256
+
+learning_rate: 5e-3
+
+mc_dropout: False
+
+bvi: 1
+
+output_activation: linear
+#-----------fixed----------------------------------------------
+
+# [regression, gmm, cmal. umal] 
+head: cmal
+# [MSE, NSE, RMSE, CMALLoss, UMALLoss]
+loss: CMALLoss
+
+n_samples: 1
+
+batch_size: 256
+
+epochs: 100
+
+output_dropout: 0
+
+negative_sample_handling: clip
+
+model: mtslstm
+
+shared_mtslstm: False
+
+# regularization:
+# - tie_frequencies
+
+#----------------------------------------------------------
+
+experiment_name: test_run
+
+use_frequencies:
+  - 1H
+  - 1D
+
+train_basin_file: basin.txt
+validation_basin_file: basin.txt
+test_basin_file: basin.txt
+
+# (format = 'dd/mm/yyyy')
+# 10 
+train_start_date: "01/01/2002"
+train_end_date: "31/12/2017"
+# 9
+validation_start_date: "01/01/2002"
+validation_end_date: "31/12/2003"
+# 10
+test_start_date: "01/01/2018"
+test_end_date: "31/12/2023"
+
+#[in format of cuda:0, cuda:1 etc, or cpu or None]
+device: cuda:0
+
+validate_every: 25
+
+validate_n_random_basins: 1
+
+metrics:
+  - KGE
+  - NSE
+
+# hidden (h) and cell state (c).
+transfer_mtslstm_states:
+  h: linear
+  c: linear
+
+initial_forget_bias: 3
+
+optimizer: Adam
+
+clip_gradient_norm: 1
+
+predict_last_n:
+  1D: 1
+  1H: 24
+
+seq_length:
+  1D: 365
+  1H: 336
+
+num_workers: 0
+
+log_interval: 100
+
+log_tensorboard: True
+
+log_n_figures: 0
+
+save_weights_every: 5
+
+# [camels_us, camels_gb, global, hourly_camels_us]
+dataset: hourly_camels_us
+
+data_dir: CAMELS_US
+
+#[daymet, maurer, maurer_extended, nldas, nldas_extended, nldas_hourly]
+forcings:
+  - nldas_hourly
+
+##  for multiple input add some char...
+##  cfs->mm/day for dauly streamflow
+##  original mm/h for hourly input
+dynamic_inputs:
+- tmp(K)
+- spfh(kg/kg)
+- pres(Pa)
+- ugrd(m/s)
+- vgrd(m/s)
+- dlwrf(W/m^2)
+- dswrf(W/m^2)
+- q90(mm/h)
+- q75(mm/h)
+- q50(mm/h)
+- q25(mm/h)
+- q10(mm/h)
+
+
+
+target_variables:
+  - QObs(mm/h)
+
+clip_targets_to_zero:
+  - QObs(mm/h)
+
+obserrormodel_beta: 0
+obserrormodel_eta: 0
+obserrormodel_num: 1
+
+bviwithini: 1
+inipath: model_epoch200.pt
+
+guideini: 0
+guideinipath: 
+
+bvisigma: 0.1
+
+
+# only works for daily cudalstm, default 1 follow bviwithini: & guideini:1
+lstmini: 1
+headini: 1
+
+# works only for MTS, default 0
+lstmfix: 1
+headfix: 0
+transferfix: 0
+
+lstmdet: 0
+svitest: 0
+svimodel: None
